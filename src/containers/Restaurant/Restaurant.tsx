@@ -3,7 +3,6 @@ import { View, SafeAreaView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import styled from 'styled-components/native';
 
-import { spacing } from '../../utils';
 import { Information } from './Information';
 
 const SafeArea = styled(SafeAreaView)`
@@ -11,7 +10,7 @@ const SafeArea = styled(SafeAreaView)`
 `;
 
 const SearchContainer = styled(View)`
-  padding: ${spacing.lg}px ${spacing.md}px;
+  padding: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.md}`};
 `;
 
 export const Restaurant = () => {

@@ -3,27 +3,29 @@ import { View, Text } from 'react-native';
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 
-import { colors, spacing } from '../../utils';
-
 const Body = styled(View)`
   flex: 1;
-  padding: ${spacing.md}px;
+  padding: ${({ theme }) => theme.spacing.md};
 `;
 
 const RestaurantCard = styled(Card)`
   flex: 1;
-  background-color: ${colors.white};
+  background-color: ${({ theme: { colors } }) => colors.bg.secondary};
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
-  padding: 16px;
-  background-color: ${colors.white};
+  padding: ${({ theme }) => theme.spacing.md};
+  background-color: ${({ theme: { colors } }) => colors.bg.primary};
 `;
 
 const RestaurantCardContent = styled(Card.Content)``;
 
 const Title = styled(Card.Title)`
-  padding: 16px;
+  padding: ${({ theme }) => theme.spacing.md};
+`;
+
+const CardText = styled(Text)`
+  font-family: ${({ theme }) => theme.fontFamily.body};
 `;
 
 export const Information = ({ restaurant = {} }) => {
@@ -44,10 +46,10 @@ export const Information = ({ restaurant = {} }) => {
         <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
         <Title title={name} />
         <RestaurantCardContent>
-          <Text>{address}</Text>
-          <Text>{isOpenNow}</Text>
-          <Text>{rating + icon}</Text>
-          <Text>{isClosedTemporarily}</Text>
+          <CardText>{address}</CardText>
+          <CardText>{isOpenNow}</CardText>
+          <CardText>{rating + icon}</CardText>
+          <CardText>{isClosedTemporarily}</CardText>
         </RestaurantCardContent>
       </RestaurantCard>
     </Body>
