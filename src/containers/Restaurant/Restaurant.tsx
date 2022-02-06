@@ -1,7 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { View, SafeAreaView } from 'react-native';
 import { Searchbar } from 'react-native-paper';
-import { colors } from './src/utils';
+import styled from 'styled-components/native';
+
+import { spacing } from '../../utils';
+import { Information } from './Information';
+
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+`;
+
+const SearchContainer = styled(View)`
+  padding: ${spacing.lg}px ${spacing.md}px;
+`;
 
 export const Restaurant = () => {
   const [searchQuery, setSearchQuery] = useState(null);
@@ -9,32 +20,15 @@ export const Restaurant = () => {
     setSearchQuery(value);
   };
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <View style={styles.searchBar}>
+    <SafeArea>
+      <SearchContainer>
         <Searchbar
           placeholder="Search"
           onChangeText={onChangeText}
           value={searchQuery}
         />
-      </View>
-      <View style={styles.body}>
-        <Text>Body</Text>
-      </View>
-    </SafeAreaView>
+      </SearchContainer>
+      <Information />
+    </SafeArea>
   );
 };
-
-const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
-  searchBar: {
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-  },
-  body: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: colors.red,
-  },
-});
