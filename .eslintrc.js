@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
-  extends: ['@react-native-community'],
-  plugins: ['react', 'react-native', '@typescript-eslint'],
+  extends: ['@react-native-community', 'plugin:flowtype/recommended'],
+  plugins: ['react', 'react-native', '@typescript-eslint', 'flowtype'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -21,7 +21,7 @@ module.exports = {
         'react-native/no-unused-styles': 1,
         'react-native/no-inline-styles': 2,
         'react-native/no-color-literals': 2,
-        'react-native/no-raw-text': 2,
+        'react-native/no-raw-text': ['error', { skip: ['Label'] }],
       },
     },
   ],
