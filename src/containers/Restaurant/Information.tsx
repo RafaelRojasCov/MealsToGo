@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
@@ -7,7 +7,7 @@ import { SvgXml } from 'react-native-svg';
 import starSvg from '../../../assets/star';
 import openSvg from '../../../assets/open';
 
-import { Spacer } from '../../components';
+import { Spacer, Text } from '../../components';
 
 const Body = styled(View)`
   flex: 1;
@@ -25,14 +25,6 @@ const RestaurantCardCover = styled(Card.Cover)`
 
 const RestaurantCardContent = styled(Card.Content)``;
 
-const Title = styled(Card.Title)`
-  padding: ${({ theme }) => theme.spacing.md};
-`;
-
-const CardText = styled(Text)`
-  font-family: ${({ theme }) => theme.fontFamily.body};
-`;
-
 const Rating = styled(View)`
   flex-direction: row;
   justify-content: space-between;
@@ -40,14 +32,8 @@ const Rating = styled(View)`
 `;
 
 const Stars = styled(View)`
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xxs}`};
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.none}`};
   flex-direction: row;
-`;
-
-const Label = styled.Text`
-  color: ${({ theme }) => theme.colors.red};
-  ${({ variant, theme }) =>
-    variant === 'label' ? `font-weight: ${theme.fontWeight.medium}` : null}
 `;
 
 const StyledImage = styled.Image`
@@ -76,8 +62,8 @@ export const Information = ({ restaurant = {} }) => {
     <Body>
       <RestaurantCard>
         <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
-        <Title title={name} />
         <RestaurantCardContent>
+          <Text variant="label">{name}</Text>
           <Rating>
             <Stars>
               {[...Array(rating)].map((_, index) => (
@@ -87,13 +73,13 @@ export const Information = ({ restaurant = {} }) => {
             {isOpenNow && <SvgXml xml={openSvg} width={30} height={30} />}
             {isClosedTemporarily && (
               <ClosedTemporarily>
-                <Label variant="label">CLOSED TEMPORARILY</Label>
+                <Text variant="error">CLOSED TEMPORARILY</Text>
                 <Spacer position="left" size="sm" />
                 <StyledImage source={{ uri: icon }} />
               </ClosedTemporarily>
             )}
           </Rating>
-          <CardText>{address}</CardText>
+          <Text>{address}</Text>
         </RestaurantCardContent>
       </RestaurantCard>
     </Body>
